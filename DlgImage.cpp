@@ -28,11 +28,21 @@ void CDlgImage::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CDlgImage, CDialogEx)
+	ON_WM_DESTROY()
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
 // CDlgImage 메시지 처리기
+
+void CDlgImage::OnDestroy()
+{
+	CDialogEx::OnDestroy();
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	if (!m_image.IsNull())
+		m_image.Destroy();
+}
 
 void CDlgImage::OnPaint()
 {
