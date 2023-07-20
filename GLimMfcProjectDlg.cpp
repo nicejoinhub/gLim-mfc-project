@@ -101,10 +101,17 @@ BOOL CGLimMfcProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	CRect rcImage;
+	CWnd *pImageArea = GetDlgItem(IDC_STC_IMAGE_AREA);
+	pImageArea->GetClientRect(&rcImage);
+	pImageArea->MapWindowPoints(this, &rcImage);
+
 	m_pDlgImage = new CDlgImage();
 	m_pDlgImage->Create(IDD_DLG_IMAGE, this);
 	m_pDlgImage->ShowWindow(SW_SHOW);
-	m_pDlgImage->MoveWindow(0, 0, 640, 480);
+	m_pDlgImage->MoveWindow(rcImage);
+
+	m_pDlgImage->CreateImage();
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
