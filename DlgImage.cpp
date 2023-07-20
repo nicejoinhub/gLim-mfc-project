@@ -109,7 +109,7 @@ void CDlgImage::DrawInformation(CDC& dc)
 	HPEN hOldPen = (HPEN)dc.SelectObject(hPenYellow);
 	HBRUSH hOldBrush = (HBRUSH)dc.SelectObject(hBrush);
 
-	dc.Ellipse(50, 50, 100, 100);
+	dc.Ellipse(nCenterX - nRadius, nCenterY - nRadius, nCenterX + nRadius, nCenterX + nRadius);
 
 	dc.SelectObject(hPenRed);
 
