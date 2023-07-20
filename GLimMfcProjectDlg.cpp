@@ -52,6 +52,7 @@ END_MESSAGE_MAP()
 
 CGLimMfcProjectDlg::CGLimMfcProjectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_GLIMMFCPROJECT_DIALOG, pParent)
+	, m_nRadius(30)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -59,6 +60,8 @@ CGLimMfcProjectDlg::CGLimMfcProjectDlg(CWnd* pParent /*=nullptr*/)
 void CGLimMfcProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT_RADIUS, m_nRadius);
+	DDV_MinMaxInt(pDX, m_nRadius, 1, 100);
 }
 
 BEGIN_MESSAGE_MAP(CGLimMfcProjectDlg, CDialogEx)
@@ -66,6 +69,8 @@ BEGIN_MESSAGE_MAP(CGLimMfcProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BTN_PATTERN, &CGLimMfcProjectDlg::OnBnClickedBtnPattern)
+	ON_BN_CLICKED(IDC_BTN_ANALYZE, &CGLimMfcProjectDlg::OnBnClickedBtnAnalyze)
 END_MESSAGE_MAP()
 
 
@@ -175,4 +180,16 @@ void CGLimMfcProjectDlg::OnPaint()
 HCURSOR CGLimMfcProjectDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+void CGLimMfcProjectDlg::OnBnClickedBtnPattern()
+{
+	UpdateData(TRUE);
+
+	m_pDlgImage->DrawCircleWithRandomPattern(m_nRadius);
+}
+
+void CGLimMfcProjectDlg::OnBnClickedBtnAnalyze()
+{
+	m_pDlgImage->GetCircleInformation();
 }
