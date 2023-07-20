@@ -30,6 +30,10 @@ protected:
 
 public:
 	void CreateImage();
+	void DrawCircleWithRandomPattern();
+
+private:
+	void GetCircleInformation();
 	void DrawImage(CDC &dc);
 	void DrawInformation(CDC& dc);
 };

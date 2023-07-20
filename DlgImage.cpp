@@ -80,6 +80,16 @@ void CDlgImage::CreateImage()
 	Invalidate(FALSE);
 }
 
+void CDlgImage::DrawCircleWithRandomPattern()
+{
+
+}
+
+void CDlgImage::GetCircleInformation()
+{
+
+}
+
 void CDlgImage::DrawImage(CDC& dc)
 {
 	m_image.Draw(dc, m_rcImage);
@@ -87,5 +97,29 @@ void CDlgImage::DrawImage(CDC& dc)
 
 void CDlgImage::DrawInformation(CDC& dc)
 {
+	int nCenterX = 75;
+	int nCenterY = 75;
+	int nRadius = 25;
+	const int nCrossLength = 5;
 
+	HPEN hPenYellow = CreatePen(PS_SOLID, 1, RGB(255, 255, 0));
+	HPEN hPenRed = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	HBRUSH hBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+
+	HPEN hOldPen = (HPEN)dc.SelectObject(hPenYellow);
+	HBRUSH hOldBrush = (HBRUSH)dc.SelectObject(hBrush);
+
+	dc.Ellipse(50, 50, 100, 100);
+
+	dc.SelectObject(hPenRed);
+
+	dc.MoveTo(nCenterX - nCrossLength, nCenterY);
+	dc.LineTo(nCenterX + nCrossLength, nCenterY);
+	dc.MoveTo(nCenterX, nCenterY - nCrossLength);
+	dc.LineTo(nCenterX, nCenterY + nCrossLength);
+
+	dc.SelectObject(hOldBrush);
+	dc.SelectObject(hOldPen);
+
+	DeleteObject(hPenYellow);
 }
