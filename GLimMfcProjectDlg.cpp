@@ -62,6 +62,7 @@ void CGLimMfcProjectDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CGLimMfcProjectDlg, CDialogEx)
+	ON_WM_DESTROY()
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -100,8 +101,24 @@ BOOL CGLimMfcProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	m_pDlgImage = new CDlgImage();
+	m_pDlgImage->Create(IDD_DLG_IMAGE, this);
+	m_pDlgImage->ShowWindow(SW_SHOW);
+	m_pDlgImage->MoveWindow(0, 0, 640, 480);
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
+}
+
+void CGLimMfcProjectDlg::OnDestroy()
+{
+	CDialogEx::OnDestroy();
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	if (m_pDlgImage)
+	{
+		m_pDlgImage->DestroyWindow();
+		delete m_pDlgImage;
+	}
 }
 
 void CGLimMfcProjectDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -152,4 +169,3 @@ HCURSOR CGLimMfcProjectDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
-
