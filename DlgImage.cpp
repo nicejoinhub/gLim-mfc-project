@@ -207,4 +207,5 @@ void CDlgImage::DrawInformation(CDC& dc)
 	dc.SelectObject(hOldPen);
 
 	DeleteObject(hPenYellow);
+	DeleteObject(hPenRed);
 }
